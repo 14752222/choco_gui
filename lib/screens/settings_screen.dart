@@ -28,9 +28,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (_dirController.text != provider.installDir) {
       _dirController.text = provider.installDir;
     }
-    // Load sources on first build
+    // Load sources on first build — defer to after the frame to avoid
+    // calling notifyListeners (via loadSources) during the build phase.
     if (provider.sources.isEmpty && !provider.loadingSources) {
-      provider.loadSources();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          provider.loadSources();
+        }
+      });
     }
   }
 
@@ -103,6 +108,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             '留空则使用 Chocolatey 默认路径',
                             style: theme.textTheme.bodySmall?.copyWith(
                                 color: colorScheme.onSurfaceVariant),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            '通过 -ia 参数传递给安装程序（支持 NSIS/MSI 等）',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                              fontSize: 11,
+                            ),
                           ),
                         ],
                       ),

@@ -289,8 +289,13 @@ if (Test-Path $chocoLib) {
     return paths;
   }
 
-  /// Installs [packageName]. Optionally specify [installDir] to override the
-  /// install location (passed as `--install-directory` to choco).
+  /// Installs [packageName].
+  ///
+  /// When [installDir] is provided, it is passed via `-ia` (install arguments)
+  /// to override the package's install directory. This works in the open-source
+  /// edition by forwarding native installer parameters (e.g., NSIS `/D=`,
+  /// MSI `INSTALLDIR`). Note: the exact argument depends on the installer type
+  /// -- most common packages (NSIS-based) accept `/D=path`.
   Future<bool> installPackage(
     String packageName, {
     void Function(String)? onOutput,
@@ -298,12 +303,15 @@ if (Test-Path $chocoLib) {
     String? version,
   }) async {
     String cmd = "choco install '${packageName.replaceAll("'", "''")}' -y --no-progress";
-    if (installDir != null && installDir.trim().isNotEmpty) {
-      final escaped = installDir.trim().replaceAll("'", "''");
-      cmd += " --install-directory '$escaped'";
-    }
     if (version != null && version.trim().isNotEmpty) {
       cmd += " --version='${version.trim()}'";
+    }
+    if (installDir != null && installDir.trim().isNotEmpty) {
+      final escaped = installDir.trim().replaceAll("'", "''");
+      // Use --install-arguments (-ia) to pass native installer dir parameter.
+      // NSIS uses /D=, which covers the majority of Chocolatey packages.
+      // For MSI/InnoSetup packages the user may need to adjust manually.
+      cmd += " --ia '/D=" + escaped + "'";
     }
     return _runStreaming(cmd, onOutput: onOutput);
   }

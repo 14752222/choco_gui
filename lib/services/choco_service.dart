@@ -311,7 +311,7 @@ if (Test-Path $chocoLib) {
       // Use --install-arguments (-ia) to pass native installer dir parameter.
       // NSIS uses /D=, which covers the majority of Chocolatey packages.
       // For MSI/InnoSetup packages the user may need to adjust manually.
-      cmd += " --ia '/D=" + escaped + "'";
+      cmd += " --ia '/D=$escaped'";
     }
     return _runStreaming(cmd, onOutput: onOutput);
   }

@@ -52,6 +52,6 @@ jobs:
             3. Run `choco_gui.exe` (right-click → Run as administrator for package management)
 
             ### Changelog
-            See [CHANGELOG.md](https://github.com/14752222/choco_gui/blob/main/CHANGELOG.md)
+            See [CHANGELOG.md](https://github.com/14752222/choco_gui/blob/master/CHANGELOG.md)
           draft: false
           prerelease: ${{ contains(github.ref_name, '-') }}

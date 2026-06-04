@@ -16,6 +16,18 @@ versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.0.1] — 2026-06-04
+
+### Fixed
+- **`--install-directory` 兼容性修复** — 开源版 Chocolatey 不支持 `--install-directory`（仅商业版），改为 `--ia /D=` 参数传递安装目录，兼容 NSIS/MSI 等常见安装器
+- **`setState() during build` 崩溃修复** — Settings 页面在 `didChangeDependencies` 中调用 `loadSources()` 会触发 `notifyListeners` 导致构建期重建，现在使用 `addPostFrameCallback` 延迟到帧结束后再加载
+- 更新应用 logo 图标（多尺寸 16/32/48/64/128/256）
+
+### Changed
+- 安装目录设置旁添加 `-ia` 参数说明文字，告知用户传递机制
+
+---
+
 ## [1.0.0] — 2026-05-31
 
 ### Added
@@ -43,5 +55,6 @@ versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-[Unreleased]: https://github.com/14752222/choco_gui/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/14752222/choco_gui/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/14752222/choco_gui/releases/tag/v1.0.1
 [1.0.0]: https://github.com/14752222/choco_gui/releases/tag/v1.0.0

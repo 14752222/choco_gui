@@ -1,0 +1,41 @@
+name: choco_gui
+description: "A modern Chocolatey package manager GUI built with Flutter"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  file_picker: ^8.1.4
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.3.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  msix: ^3.16.8
+
+msix_config:
+  display_name: Choco GUI
+  publisher_display_name: Choco GUI
+  publisher: CN=ChocoGUI
+  identity_name: com.chocogui.app
+  msix_version: 1.0.0.0
+  logo_path: assets\images\logo.png
+  capabilities: internetClient
+  # certificate_path and certificate_password are intentionally omitted from
+  # version control. Set them locally or via CI secrets when building MSIX.
+  # certificate_path: path\to\your.pfx
+  # certificate_password: YOUR_PASSWORD
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/

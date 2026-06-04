@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build & Publish Release
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x"
+          channel: stable
+          cache: true
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build Windows release
+        run: flutter build windows --release
+
+      - name: Package release zip
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}"
+          $outDir  = "build\windows\x64\runner\Release"
+          $zipName = "ChocoGUI_${version}_windows_x64.zip"
+          Compress-Archive -Path "$outDir\*" -DestinationPath $zipName
+          echo "ZIP_NAME=$zipName" >> $env:GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+          body: |
+            ## Choco GUI ${{ github.ref_name }}
+
+            ### Installation
+            1. Download `ChocoGUI_${{ github.ref_name }}_windows_x64.zip`
+            2. Extract anywhere
+            3. Run `choco_gui.exe` (right-click → Run as administrator for package management)
+
+            ### Changelog
+            See [CHANGELOG.md](https://github.com/14752222/choco_gui/blob/main/CHANGELOG.md)
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

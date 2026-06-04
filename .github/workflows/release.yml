@@ -30,26 +30,48 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
-      - name: Package release zip
+      - name: Copy build output to installer
+        shell: pwsh
+        run: |
+          $appDir = "installer\app"
+          New-Item -ItemType Directory -Force -Path $appDir | Out-Null
+          Copy-Item -Recurse -Force "build\windows\x64\runner\Release\*" $appDir
+
+      - name: Build installer with Inno Setup
+        shell: pwsh
+        run: |
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          & $iscc "installer\choco_gui_setup.iss"
+
+      - name: Set release variables
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}"
-          $outDir  = "build\windows\x64\runner\Release"
-          $zipName = "ChocoGUI_${version}_windows_x64.zip"
-          Compress-Archive -Path "$outDir\*" -DestinationPath $zipName
-          echo "ZIP_NAME=$zipName" >> $env:GITHUB_ENV
+          $installerPath = Get-ChildItem "installer\output\ChocoGUI_Setup_*.exe" | Select-Object -First 1
+          echo "INSTALLER=$($installerPath.FullName)" >> $env:GITHUB_ENV
+          echo "INSTALLER_NAME=$($installerPath.Name)" >> $env:GITHUB_ENV
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZIP_NAME }}
+          files: ${{ env.INSTALLER }}
           body: |
             ## Choco GUI ${{ github.ref_name }}
 
+            ### 安装方法
+            1. 下载 `${{ env.INSTALLER_NAME }}`
+            2. 双击运行安装程序（需要管理员权限）
+            3. 按照安装向导完成安装
+
+            ### 更新日志
+            详见 [CHANGELOG.md](https://github.com/14752222/choco_gui/blob/master/CHANGELOG.md)
+
+            ---
+
             ### Installation
-            1. Download `ChocoGUI_${{ github.ref_name }}_windows_x64.zip`
-            2. Extract anywhere
-            3. Run `choco_gui.exe` (right-click → Run as administrator for package management)
+            1. Download `${{ env.INSTALLER_NAME }}`
+            2. Double-click to run the installer (Admin rights required)
+            3. Follow the setup wizard to complete installation
 
             ### Changelog
             See [CHANGELOG.md](https://github.com/14752222/choco_gui/blob/master/CHANGELOG.md)

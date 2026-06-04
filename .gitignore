@@ -60,7 +60,8 @@ app.*.map.json
 *.appx
 *.zip
 ChocoGUI_Installer_*.zip
-installer/
+installer/app/
+installer/output/
 
 # Sensitive config
 *.env

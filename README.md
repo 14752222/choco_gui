@@ -24,21 +24,22 @@
 | 功能 | 说明 |
 |---|---|
 | 🔍 **智能搜索** | 支持模糊搜索和精确搜索，基于 `choco search` 实时返回结果 |
-| 📦 **包管理** | 安装、卸载、升级软件包，实时显示操作日志 |
-| 🔢 **版本选择** | 安装时可选择任意历史版本 |
+| 📦 **包管理** | 安装、卸载软件包，实时操作日志；支持安装历史版本 |
+| 🎁 **推荐套餐** | 按用户类型提供预制套餐（前端/后端/设计师等），自由搭配免费/付费选项，一键批量安装 |
+| 📋 **配置导入/导出** | JSON 格式导入/导出软件配置，自动验证包可用性，快速复刻开发环境 |
 | ⭐ **推荐软件** | 精选常用软件列表，一键快速安装 |
 | 🗂️ **软件源管理** | 添加 / 删除 / 启用 / 禁用 Chocolatey 软件源，内置国内镜像提示 |
-| 📁 **安装路径** | 自动读取 `$env:ChocolateyInstall`，预填安装目录 |
+| 📁 **安装路径** | 自动读取 `$env:ChocolateyInstall`，已安装包可查看并复制安装路径 |
 | 🌗 **明暗主题** | 完整 Material 3 主题，采用暖棕配色方案 |
-| 🚨 **自动安装 Choco** | 检测到未安装 Chocolatey 时，可一键完成安装 |
+| 🚨 **自动安装 Choco** | 检测到未安装 Chocolatey 时，可一键完成安装；安装失败支持清理缓存重试 |
 
 ### 🖼️ 截图
 
-![img.png](assets/screenshot/img.png)
-![img_1.png](assets/screenshot/img_1.png)
-![img_2.png](assets/screenshot/img_2.png)
-![img_3.png](assets/screenshot/img_3.png)
-![img_4.png](assets/screenshot/img_4.png)
+![软件搜索](assets/screenshot/img.png)
+![推荐套餐](assets/screenshot/img_1.png)
+![套餐详情](assets/screenshot/img_2.png)
+![已安装管理](assets/screenshot/img_3.png)
+![软件源设置](assets/screenshot/img_4.png)
 
 ### 🚀 快速开始
 
@@ -66,25 +67,34 @@ flutter run -d windows
 
 ```
 lib/
-├── main.dart                  # 入口文件
-├── app.dart                   # 根组件与主题定义
+├── main.dart                     # 入口文件
+├── app.dart                      # 根组件与主题定义
+├── data/
+│   └── bundles/
+│       └── bundles.json          # 预制套餐数据
 ├── models/
-│   └── package_model.dart     # PackageModel 与 ChocoSource 数据类
+│   ├── package_model.dart        # PackageModel 与 ChocoSource 数据类
+│   ├── bundle_model.dart         # RecommendedBundle / SoftwareSlot / SoftwareOption
+│   └── imported_config.dart      # ImportedConfig 数据类
 ├── providers/
-│   └── app_provider.dart      # 状态管理（InheritedWidget）
+│   ├── app_provider.dart         # 全局状态管理（InheritedWidget）
+│   └── bundle_provider.dart      # 套餐状态管理
 ├── services/
-│   └── choco_service.dart     # 所有 Chocolatey CLI 调用（通过 PowerShell）
+│   └── choco_service.dart        # 所有 Chocolatey CLI 调用（通过 PowerShell）
 ├── screens/
-│   ├── home_screen.dart       # 主页面（含 NavigationRail）
-│   ├── recommended_screen.dart
-│   ├── installed_screen.dart
-│   ├── search_screen.dart
-│   ├── settings_screen.dart
-│   └── package_detail_screen.dart
+│   ├── home_screen.dart          # 主页面（含 NavigationRail）
+│   ├── bundles_screen.dart       # 套餐列表页
+│   ├── bundle_detail_screen.dart # 套餐详情页
+│   ├── import_screen.dart        # 配置导入页
+│   ├── recommended_screen.dart   # 推荐软件页
+│   ├── installed_screen.dart     # 已安装管理页
+│   ├── search_screen.dart        # 搜索页
+│   ├── settings_screen.dart      # 设置页
+│   └── package_detail_screen.dart# 软件详情页
 └── widgets/
-    ├── package_card.dart
-    ├── pagination_bar.dart
-    └── progress_dialog.dart
+    ├── package_card.dart         # 软件卡片组件
+    ├── pagination_bar.dart       # 分页组件
+    └── progress_dialog.dart      # 进度弹窗组件
 ```
 
 ### 🛠️ 构建
@@ -119,21 +129,22 @@ iscc installer\choco_gui_setup.iss
 | Feature | Description |
 |---|---|
 | 🔍 **Smart Search** | Fuzzy / exact search powered by `choco search`, with real-time results |
-| 📦 **Package Management** | Install, uninstall, and upgrade packages with a real-time log console |
-| 🔢 **Version Selection** | Choose any historical version when installing a package |
+| 📦 **Package Management** | Install & uninstall packages with real-time logs; historical version support |
+| 🎁 **Software Bundles** | Pre-built bundles by user role (frontend / backend / designer etc.), with free / paid alternatives, one-click batch install |
+| 📋 **Import / Export** | JSON-based config import & export, auto-verify package availability, replicate dev environments instantly |
 | ⭐ **Recommended Packages** | Curated list of popular packages for quick one-click install |
 | 🗂️ **Source Management** | Add / remove / enable / disable Chocolatey sources (supports Chinese mirrors) |
-| 📁 **Install Path** | Auto-detect `$env:ChocolateyInstall` and pre-fill the install directory |
+| 📁 **Install Path** | Auto-detect `$env:ChocolateyInstall`; view & copy installed package paths |
 | 🌗 **Light / Dark Theme** | Full Material 3 theming with a warm taupe colour palette |
-| 🚨 **Auto Chocolatey Setup** | Detect and install Chocolatey automatically if not present |
+| 🚨 **Auto Chocolatey Setup** | Detect and install Chocolatey automatically; cleanup cache on failure and retry |
 
 ### 🖼️ Screenshots
 
-!![img.png](assets/screenshot/img.png)
-![img_1.png](assets/screenshot/img_1.png)
-![img_2.png](assets/screenshot/img_2.png)
-![img_3.png](assets/screenshot/img_3.png)
-![img_4.png](assets/screenshot/img_4.png)
+![Software Search](assets/screenshot/img.png)
+![Software Bundles](assets/screenshot/img_1.png)
+![Bundle Details](assets/screenshot/img_2.png)
+![Installed Packages](assets/screenshot/img_3.png)
+![Source Settings](assets/screenshot/img_4.png)
 
 ### 🚀 Quick Start
 
@@ -161,25 +172,34 @@ flutter run -d windows
 
 ```
 lib/
-├── main.dart                  # Entry point
-├── app.dart                   # Root widget & theme definitions
+├── main.dart                     # Entry point
+├── app.dart                      # Root widget & theme definitions
+├── data/
+│   └── bundles/
+│       └── bundles.json          # Pre-built bundle data
 ├── models/
-│   └── package_model.dart     # PackageModel & ChocoSource data classes
+│   ├── package_model.dart        # PackageModel & ChocoSource data classes
+│   ├── bundle_model.dart         # RecommendedBundle / SoftwareSlot / SoftwareOption
+│   └── imported_config.dart      # ImportedConfig data class
 ├── providers/
-│   └── app_provider.dart      # State management (InheritedWidget)
+│   ├── app_provider.dart         # Global state management (InheritedWidget)
+│   └── bundle_provider.dart      # Bundle state management
 ├── services/
-│   └── choco_service.dart     # All Chocolatey CLI calls via PowerShell
+│   └── choco_service.dart        # All Chocolatey CLI calls via PowerShell
 ├── screens/
-│   ├── home_screen.dart       # Main scaffold with NavigationRail
-│   ├── recommended_screen.dart
-│   ├── installed_screen.dart
-│   ├── search_screen.dart
-│   ├── settings_screen.dart
-│   └── package_detail_screen.dart
+│   ├── home_screen.dart          # Main scaffold with NavigationRail
+│   ├── bundles_screen.dart       # Bundle list page
+│   ├── bundle_detail_screen.dart # Bundle detail page
+│   ├── import_screen.dart        # Config import page
+│   ├── recommended_screen.dart   # Recommended packages page
+│   ├── installed_screen.dart     # Installed packages page
+│   ├── search_screen.dart        # Search page
+│   ├── settings_screen.dart      # Settings page
+│   └── package_detail_screen.dart# Package detail page
 └── widgets/
-    ├── package_card.dart
-    ├── pagination_bar.dart
-    └── progress_dialog.dart
+    ├── package_card.dart         # Package card widget
+    ├── pagination_bar.dart       # Pagination bar widget
+    └── progress_dialog.dart      # Progress dialog widget
 ```
 
 ### 🛠️ Build

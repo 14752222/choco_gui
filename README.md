@@ -34,7 +34,11 @@
 
 ### 🖼️ 截图
 
-> _首版发布后补充截图_
+![img.png](assets/screenshot/img.png)
+![img_1.png](assets/screenshot/img_1.png)
+![img_2.png](assets/screenshot/img_2.png)
+![img_3.png](assets/screenshot/img_3.png)
+![img_4.png](assets/screenshot/img_4.png)
 
 ### 🚀 快速开始
 
@@ -125,7 +129,11 @@ iscc installer\choco_gui_setup.iss
 
 ### 🖼️ Screenshots
 
-> _Add screenshots after first release_
+!![img.png](assets/screenshot/img.png)
+![img_1.png](assets/screenshot/img_1.png)
+![img_2.png](assets/screenshot/img_2.png)
+![img_3.png](assets/screenshot/img_3.png)
+![img_4.png](assets/screenshot/img_4.png)
 
 ### 🚀 Quick Start
 

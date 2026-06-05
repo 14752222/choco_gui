@@ -1,11 +1,11 @@
 ; ============================================================
 ;  Choco GUI - Inno Setup 安装脚本
-;  版本: 1.0.1
+;  版本: 1.0.2
 ;  所有路径均使用相对路径，兼容本地和 CI 环境
 ; ============================================================
 
 #define AppName "Choco GUI"
-#define AppVersion "1.0.1"
+#define AppVersion "1.0.2"
 #define AppPublisher "Choco GUI"
 #define AppURL "https://github.com/14752222/choco_gui"
 #define AppExeName "choco_gui.exe"

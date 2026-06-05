@@ -4,7 +4,7 @@ title Choco GUI 安装向导
 
 echo.
 echo ╔══════════════════════════════════════════╗
-echo ║      Choco GUI v1.0.0 安装向导           ║
+echo ║      Choco GUI v1.0.2 安装向导           ║
 echo ║  Chocolatey 包管理器图形界面客户端        ║
 echo ╚══════════════════════════════════════════╝
 echo.

@@ -257,7 +257,7 @@ class _OperationProgressDialogState
   @override
   void initState() {
     super.initState();
-    _run();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _run());
   }
 
   @override

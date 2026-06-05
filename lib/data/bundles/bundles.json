@@ -1,0 +1,860 @@
+[
+  {
+    "id": "backend-dev",
+    "name": "后端开发者",
+    "icon": "🖥️",
+    "description": "Java / Python / Go / Node.js 后端开发全家桶",
+    "slots": [
+      {
+        "slotName": "IDE",
+        "description": "写代码的主编辑器",
+        "options": [
+          { "name": "VS Code", "chocoPackage": "vscode", "pricingType": "free", "description": "轻量级全能编辑器" },
+          { "name": "Zed", "chocoPackage": "zed-editor", "pricingType": "free", "description": "极速协作 AI 编辑器" },
+          { "name": "IntelliJ IDEA Community", "chocoPackage": "intellijidea-community", "pricingType": "free", "description": "Java 开发首选" },
+          { "name": "IntelliJ IDEA Ultimate", "chocoPackage": "intellijidea-ultimate", "pricingType": "paid", "priceHint": "$149/年", "description": "全栈 IDE，含数据库工具" }
+        ]
+      },
+      {
+        "slotName": "版本控制",
+        "description": "代码版本管理",
+        "options": [
+          { "name": "Git", "chocoPackage": "git", "pricingType": "free", "description": "分布式版本控制系统" }
+        ]
+      },
+      {
+        "slotName": "数据库工具",
+        "description": "数据库连接与管理",
+        "options": [
+          { "name": "DBeaver", "chocoPackage": "dbeaver", "pricingType": "free", "description": "通用数据库管理工具" },
+          { "name": "DataGrip", "chocoPackage": "datagrip", "pricingType": "paid", "priceHint": "$199/年", "description": "JetBrains 数据库 IDE" }
+        ]
+      },
+      {
+        "slotName": "数据库",
+        "description": "本地数据库服务",
+        "options": [
+          { "name": "MySQL", "chocoPackage": "mysql", "pricingType": "free", "description": "关系型数据库" },
+          { "name": "PostgreSQL", "chocoPackage": "postgresql", "pricingType": "free", "description": "高级开源关系数据库" }
+        ]
+      },
+      {
+        "slotName": "缓存",
+        "description": "高性能缓存服务",
+        "options": [
+          { "name": "Redis", "chocoPackage": "redis-64", "pricingType": "free", "description": "内存键值存储" }
+        ]
+      },
+      {
+        "slotName": "容器",
+        "description": "容器化开发环境",
+        "options": [
+          { "name": "Docker Desktop", "chocoPackage": "docker-desktop", "pricingType": "free", "description": "容器运行时与编排" }
+        ]
+      },
+      {
+        "slotName": "JDK",
+        "description": "Java 开发工具包",
+        "options": [
+          { "name": "Eclipse Temurin JDK", "chocoPackage": "temurin", "pricingType": "free", "description": "OpenJDK 发行版" },
+          { "name": "Oracle JDK", "chocoPackage": "jdk11", "pricingType": "paid", "priceHint": "商业许可", "description": "Oracle 官方 JDK" }
+        ]
+      },
+      {
+        "slotName": "Go",
+        "description": "Go 语言运行环境",
+        "options": [
+          { "name": "Go (Golang)", "chocoPackage": "golang", "pricingType": "free", "description": "Go 官方发行版" }
+        ]
+      },
+      {
+        "slotName": "Rust",
+        "description": "Rust 语言工具链",
+        "options": [
+          { "name": "Rust (rustup)", "chocoPackage": "rustup-init", "pricingType": "free", "description": "Rust 官方安装工具" }
+        ]
+      },
+      {
+        "slotName": "Zig",
+        "description": "Zig 语言编译器",
+        "options": [
+          { "name": "Zig", "chocoPackage": "zig", "pricingType": "free", "description": "现代系统编程语言" }
+        ]
+      },
+      {
+        "slotName": "C/C++ 工具链",
+        "description": "C/C++ 编译与构建",
+        "options": [
+          { "name": "MinGW-w64", "chocoPackage": "mingw", "pricingType": "free", "description": "Windows C/C++ 编译器" },
+          { "name": "LLVM/Clang", "chocoPackage": "llvm", "pricingType": "free", "description": "模块化编译器工具链" }
+        ]
+      },
+      {
+        "slotName": ".NET SDK",
+        "description": "C# / F# / .NET 开发",
+        "options": [
+          { "name": ".NET SDK", "chocoPackage": "dotnet-sdk", "pricingType": "free", "description": "微软 .NET 开发工具包" }
+        ]
+      },
+      {
+        "slotName": "构建工具",
+        "description": "项目构建与依赖管理",
+        "options": [
+          { "name": "Maven", "chocoPackage": "maven", "pricingType": "free", "description": "Java 项目构建工具" },
+          { "name": "Gradle", "chocoPackage": "gradle", "pricingType": "free", "description": "灵活的多语言构建系统" }
+        ]
+      },
+      {
+        "slotName": "API 测试",
+        "description": "接口调试与测试",
+        "options": [
+          { "name": "Postman", "chocoPackage": "postman", "pricingType": "free", "description": "API 开发与测试平台" }
+        ]
+      },
+      {
+        "slotName": "AI 大模型",
+        "description": "本地运行大语言模型",
+        "options": [
+          { "name": "Ollama", "chocoPackage": "ollama", "pricingType": "free", "description": "本地运行 Llama、Mistral 等开源模型" },
+          { "name": "LM Studio", "chocoPackage": "lm-studio", "pricingType": "free", "description": "图形化本地大模型运行与聊天" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "frontend-dev",
+    "name": "前端开发者",
+    "icon": "🎨",
+    "description": "React / Vue / Angular 前端开发工具集",
+    "slots": [
+      {
+        "slotName": "IDE",
+        "description": "写代码的主编辑器",
+        "options": [
+          { "name": "VS Code", "chocoPackage": "vscode", "pricingType": "free", "description": "前端开发首选编辑器" },
+          { "name": "Zed", "chocoPackage": "zed-editor", "pricingType": "free", "description": "极速协作 AI 编辑器" },
+          { "name": "WebStorm", "chocoPackage": "webstorm", "pricingType": "paid", "priceHint": "$69/年", "description": "JetBrains 前端 IDE" }
+        ]
+      },
+      {
+        "slotName": "版本控制",
+        "description": "代码版本管理",
+        "options": [
+          { "name": "Git", "chocoPackage": "git", "pricingType": "free", "description": "分布式版本控制系统" }
+        ]
+      },
+      {
+        "slotName": "Node.js",
+        "description": "JavaScript 运行环境",
+        "options": [
+          { "name": "Node.js", "chocoPackage": "nodejs", "pricingType": "free", "description": "JavaScript 运行时" }
+        ]
+      },
+      {
+        "slotName": "版本管理",
+        "description": "Node.js 版本切换工具",
+        "options": [
+          { "name": "NVM for Windows", "chocoPackage": "nvm", "pricingType": "free", "description": "Node.js 版本管理器" }
+        ]
+      },
+      {
+        "slotName": "包管理器",
+        "description": "前端依赖管理",
+        "options": [
+          { "name": "Yarn", "chocoPackage": "yarn", "pricingType": "free", "description": "快速可靠的包管理" },
+          { "name": "pnpm", "chocoPackage": "pnpm", "pricingType": "free", "description": "高效磁盘空间的包管理" }
+        ]
+      },
+      {
+        "slotName": "浏览器",
+        "description": "开发调试",
+        "options": [
+          { "name": "Google Chrome", "chocoPackage": "googlechrome", "pricingType": "free", "description": "主流浏览器" },
+          { "name": "Firefox", "chocoPackage": "firefox", "pricingType": "free", "description": "开源浏览器" }
+        ]
+      },
+      {
+        "slotName": "API 测试",
+        "description": "接口调试",
+        "options": [
+          { "name": "Postman", "chocoPackage": "postman", "pricingType": "free", "description": "API 开发与测试" }
+        ]
+      },
+      {
+        "slotName": "设计工具",
+        "description": "UI 设计与协作",
+        "options": [
+          { "name": "Figma", "chocoPackage": "figma", "pricingType": "free", "description": "协作式 UI 设计工具" }
+        ]
+      },
+      {
+        "slotName": "容器",
+        "description": "开发环境容器化",
+        "options": [
+          { "name": "Docker Desktop", "chocoPackage": "docker-desktop", "pricingType": "free", "description": "容器运行时" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "student",
+    "name": "学生通用",
+    "icon": "🎓",
+    "description": "学习、记笔记、写论文常用软件",
+    "slots": [
+      {
+        "slotName": "浏览器",
+        "description": "上网查资料",
+        "options": [
+          { "name": "Google Chrome", "chocoPackage": "googlechrome", "pricingType": "free", "description": "主流浏览器" },
+          { "name": "Firefox", "chocoPackage": "firefox", "pricingType": "free", "description": "开源浏览器" }
+        ]
+      },
+      {
+        "slotName": "笔记",
+        "description": "课堂笔记与知识管理",
+        "options": [
+          { "name": "Obsidian", "chocoPackage": "obsidian", "pricingType": "free", "description": "本地 Markdown 笔记" },
+          { "name": "Notion", "chocoPackage": "notion", "pricingType": "free", "description": "全能协作笔记" }
+        ]
+      },
+      {
+        "slotName": "通讯",
+        "description": "与朋友保持联系",
+        "options": [
+          { "name": "微信", "chocoPackage": "wechat", "pricingType": "free", "description": "日常通讯" },
+          { "name": "钉钉", "chocoPackage": "dingtalk", "pricingType": "free", "description": "班级群与网课" },
+          { "name": "Discord", "chocoPackage": "discord", "pricingType": "free", "description": "学习社区交流" }
+        ]
+      },
+      {
+        "slotName": "压缩工具",
+        "description": "解压课件和资料",
+        "options": [
+          { "name": "7-Zip", "chocoPackage": "7zip", "pricingType": "free", "description": "轻量高效压缩工具" }
+        ]
+      },
+      {
+        "slotName": "PDF 阅读",
+        "description": "查看论文和教材",
+        "options": [
+          { "name": "Adobe Reader", "chocoPackage": "adobereader", "pricingType": "free", "description": "PDF 查看器" }
+        ]
+      },
+      {
+        "slotName": "媒体播放",
+        "description": "看视频课件",
+        "options": [
+          { "name": "VLC", "chocoPackage": "vlc", "pricingType": "free", "description": "万能媒体播放器" }
+        ]
+      },
+      {
+        "slotName": "记忆卡片",
+        "description": "背诵和复习",
+        "options": [
+          { "name": "Anki", "chocoPackage": "anki", "pricingType": "free", "description": "间隔重复记忆工具" }
+        ]
+      },
+      {
+        "slotName": "文件搜索",
+        "description": "快速找到资料",
+        "options": [
+          { "name": "Everything", "chocoPackage": "everything", "pricingType": "free", "description": "极速文件名搜索" }
+        ]
+      },
+      {
+        "slotName": "密码管理",
+        "description": "账号密码安全",
+        "options": [
+          { "name": "KeePass", "chocoPackage": "keepass", "pricingType": "free", "description": "开源密码管理器" }
+        ]
+      },
+      {
+        "slotName": "视频会议",
+        "description": "网课与视频面试",
+        "options": [
+          { "name": "Zoom", "chocoPackage": "zoom", "pricingType": "free", "description": "视频会议软件" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accounting",
+    "name": "会计 / 财务",
+    "icon": "🧮",
+    "description": "Excel 数据处理、财务分析工具",
+    "slots": [
+      {
+        "slotName": "办公套件",
+        "description": "文档与表格处理",
+        "options": [
+          { "name": "LibreOffice", "chocoPackage": "libreoffice-fresh", "pricingType": "free", "description": "开源办公套件" },
+          { "name": "Microsoft Office", "chocoPackage": "office365business", "pricingType": "paid", "priceHint": "订阅制", "description": "微软办公套件" }
+        ]
+      },
+      {
+        "slotName": "数据处理",
+        "description": "数据分析与自动化",
+        "options": [
+          { "name": "Python", "chocoPackage": "python", "pricingType": "free", "description": "数据分析语言" },
+          { "name": "R", "chocoPackage": "r", "pricingType": "free", "description": "统计分析语言" }
+        ]
+      },
+      {
+        "slotName": "可视化",
+        "description": "数据看板与报表",
+        "options": [
+          { "name": "Power BI Desktop", "chocoPackage": "powerbi", "pricingType": "free", "description": "微软数据可视化" },
+          { "name": "Tableau Public", "chocoPackage": "tableau-public", "pricingType": "free", "description": "免费数据可视化" },
+          { "name": "Tableau Desktop", "chocoPackage": "tableau-desktop", "pricingType": "paid", "priceHint": "$70/月", "description": "专业数据可视化" }
+        ]
+      },
+      {
+        "slotName": "密码管理",
+        "description": "管理各类账号密码",
+        "options": [
+          { "name": "KeePass", "chocoPackage": "keepass", "pricingType": "free", "description": "安全密码管理" }
+        ]
+      },
+      {
+        "slotName": "PDF 工具",
+        "description": "处理发票和报告",
+        "options": [
+          { "name": "Adobe Reader", "chocoPackage": "adobereader", "pricingType": "free", "description": "PDF 查看与注释" }
+        ]
+      },
+      {
+        "slotName": "压缩工具",
+        "description": "打包文件",
+        "options": [
+          { "name": "7-Zip", "chocoPackage": "7zip", "pricingType": "free", "description": "高效压缩解压" }
+        ]
+      },
+      {
+        "slotName": "数据库工具",
+        "description": "数据查询",
+        "options": [
+          { "name": "DBeaver", "chocoPackage": "dbeaver", "pricingType": "free", "description": "通用数据库管理" }
+        ]
+      },
+      {
+        "slotName": "浏览器",
+        "description": "访问电子税务局/银行",
+        "options": [
+          { "name": "Google Chrome", "chocoPackage": "googlechrome", "pricingType": "free", "description": "主流浏览器" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "designer",
+    "name": "设计师",
+    "icon": "🎨",
+    "description": "UI/UX、平面、3D、视频设计工具",
+    "slots": [
+      {
+        "slotName": "UI 设计",
+        "description": "界面设计与协作",
+        "options": [
+          { "name": "Figma", "chocoPackage": "figma", "pricingType": "free", "description": "协作 UI 设计" }
+        ]
+      },
+      {
+        "slotName": "图像编辑",
+        "description": "位图与矢量图形",
+        "options": [
+          { "name": "GIMP", "chocoPackage": "gimp", "pricingType": "free", "description": "开源图像处理" },
+          { "name": "Inkscape", "chocoPackage": "inkscape", "pricingType": "free", "description": "开源矢量绘图" }
+        ]
+      },
+      {
+        "slotName": "3D 建模",
+        "description": "三维创作与渲染",
+        "options": [
+          { "name": "Blender", "chocoPackage": "blender", "pricingType": "free", "description": "全功能 3D 创作套件" }
+        ]
+      },
+      {
+        "slotName": "视频编辑",
+        "description": "剪辑与转码",
+        "options": [
+          { "name": "HandBrake", "chocoPackage": "handbrake", "pricingType": "free", "description": "视频转码工具" },
+          { "name": "FFmpeg", "chocoPackage": "ffmpeg", "pricingType": "free", "description": "命令行音视频处理" }
+        ]
+      },
+      {
+        "slotName": "音频编辑",
+        "description": "录音与音频处理",
+        "options": [
+          { "name": "Audacity", "chocoPackage": "audacity", "pricingType": "free", "description": "开源音频编辑器" }
+        ]
+      },
+      {
+        "slotName": "直播/录屏",
+        "description": "屏幕录制与直播",
+        "options": [
+          { "name": "OBS Studio", "chocoPackage": "obs-studio", "pricingType": "free", "description": "直播与录屏" }
+        ]
+      },
+      {
+        "slotName": "浏览器",
+        "description": "设计资源与灵感",
+        "options": [
+          { "name": "Google Chrome", "chocoPackage": "googlechrome", "pricingType": "free", "description": "主流浏览器" },
+          { "name": "Firefox", "chocoPackage": "firefox", "pricingType": "free", "description": "开源浏览器" }
+        ]
+      },
+      {
+        "slotName": "笔记",
+        "description": "灵感与素材管理",
+        "options": [
+          { "name": "Obsidian", "chocoPackage": "obsidian", "pricingType": "free", "description": "Markdown 知识库" },
+          { "name": "Notion", "chocoPackage": "notion", "pricingType": "free", "description": "协作笔记" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "devops",
+    "name": "运维 / DevOps",
+    "icon": "⚙️",
+    "description": "服务器管理、网络、自动化运维工具",
+    "slots": [
+      {
+        "slotName": "终端",
+        "description": "命令行工具",
+        "options": [
+          { "name": "PowerShell Core", "chocoPackage": "powershell-core", "pricingType": "free", "description": "跨平台命令行" },
+          { "name": "Windows Terminal", "chocoPackage": "microsoft-windows-terminal", "pricingType": "free", "description": "现代终端管理器" }
+        ]
+      },
+      {
+        "slotName": "远程连接",
+        "description": "服务器远程管理",
+        "options": [
+          { "name": "PuTTY", "chocoPackage": "putty", "pricingType": "free", "description": "SSH/Telnet 客户端" },
+          { "name": "WinSCP", "chocoPackage": "winscp", "pricingType": "free", "description": "SFTP/FTP 文件传输" },
+          { "name": "OpenSSH", "chocoPackage": "openssh", "pricingType": "free", "description": "SSH 服务端和客户端" }
+        ]
+      },
+      {
+        "slotName": "容器与编排",
+        "description": "容器化部署",
+        "options": [
+          { "name": "Docker Desktop", "chocoPackage": "docker-desktop", "pricingType": "free", "description": "容器运行时" },
+          { "name": "Helm", "chocoPackage": "kubernetes-helm", "pricingType": "free", "description": "Kubernetes 包管理" },
+          { "name": "Terraform", "chocoPackage": "terraform", "pricingType": "free", "description": "基础设施即代码" }
+        ]
+      },
+      {
+        "slotName": "云 CLI",
+        "description": "云平台命令行",
+        "options": [
+          { "name": "AWS CLI", "chocoPackage": "awscli", "pricingType": "free", "description": "Amazon Web Services CLI" }
+        ]
+      },
+      {
+        "slotName": "网络分析",
+        "description": "网络诊断与抓包",
+        "options": [
+          { "name": "Wireshark", "chocoPackage": "wireshark", "pricingType": "free", "description": "网络协议分析" },
+          { "name": "Nmap", "chocoPackage": "nmap", "pricingType": "free", "description": "端口扫描与网络发现" }
+        ]
+      },
+      {
+        "slotName": "系统监控",
+        "description": "硬件信息查看",
+        "options": [
+          { "name": "HWiNFO", "chocoPackage": "hwinfo", "pricingType": "free", "description": "系统硬件诊断" }
+        ]
+      },
+      {
+        "slotName": "数据库工具",
+        "description": "数据库管理",
+        "options": [
+          { "name": "DBeaver", "chocoPackage": "dbeaver", "pricingType": "free", "description": "通用数据库管理" }
+        ]
+      },
+      {
+        "slotName": "版本控制",
+        "description": "配置与脚本管理",
+        "options": [
+          { "name": "Git", "chocoPackage": "git", "pricingType": "free", "description": "版本控制系统" }
+        ]
+      },
+      {
+        "slotName": "AI 大模型",
+        "description": "部署与运行大模型服务",
+        "options": [
+          { "name": "Ollama", "chocoPackage": "ollama", "pricingType": "free", "description": "本地运行 Llama、Mistral 等开源模型" },
+          { "name": "LM Studio", "chocoPackage": "lm-studio", "pricingType": "free", "description": "图形化本地大模型运行与聊天" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gamer",
+    "name": "游戏玩家",
+    "icon": "🎮",
+    "description": "游戏平台 + 直播 + 性能优化全套装",
+    "slots": [
+      {
+        "slotName": "游戏平台",
+        "description": "购买与管理游戏",
+        "options": [
+          { "name": "Steam", "chocoPackage": "steam-client", "pricingType": "free", "description": "最大 PC 游戏平台" },
+          { "name": "Epic Games", "chocoPackage": "epicgameslauncher", "pricingType": "free", "description": "Epic 游戏平台" },
+          { "name": "Ubisoft Connect", "chocoPackage": "ubisoft-connect", "pricingType": "free", "description": "育碧游戏平台" },
+          { "name": "EA Origin", "chocoPackage": "origin", "pricingType": "free", "description": "EA 游戏平台" }
+        ]
+      },
+      {
+        "slotName": "语音通讯",
+        "description": "组队开黑",
+        "options": [
+          { "name": "Discord", "chocoPackage": "discord", "pricingType": "free", "description": "游戏语音与社区" }
+        ]
+      },
+      {
+        "slotName": "显卡工具",
+        "description": "驱动与优化（NVIDIA / AMD）",
+        "options": [
+          { "name": "GeForce Experience", "chocoPackage": "geforce-experience", "pricingType": "free", "description": "NVIDIA 驱动与优化" },
+          { "name": "AMD Software Adrenalin", "chocoPackage": "amd-software-adrenalin", "pricingType": "free", "description": "AMD 显卡驱动与控制中心" }
+        ]
+      },
+      {
+        "slotName": "超频/监控",
+        "description": "性能调优与温度监控",
+        "options": [
+          { "name": "MSI Afterburner", "chocoPackage": "msiafterburner", "pricingType": "free", "description": "显卡超频与 OSD 监控" },
+          { "name": "HWiNFO", "chocoPackage": "hwinfo", "pricingType": "free", "description": "系统全面诊断" }
+        ]
+      },
+      {
+        "slotName": "直播/录屏",
+        "description": "游戏录制与直播推流",
+        "options": [
+          { "name": "OBS Studio", "chocoPackage": "obs-studio", "pricingType": "free", "description": "直播与录制工具" }
+        ]
+      },
+      {
+        "slotName": "浏览器",
+        "description": "查攻略和看直播",
+        "options": [
+          { "name": "Google Chrome", "chocoPackage": "googlechrome", "pricingType": "free", "description": "主流浏览器" },
+          { "name": "Firefox", "chocoPackage": "firefox", "pricingType": "free", "description": "开源浏览器" }
+        ]
+      },
+      {
+        "slotName": "通讯",
+        "description": "随时联系队友",
+        "options": [
+          { "name": "微信", "chocoPackage": "wechat", "pricingType": "free", "description": "日常通讯" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "data-analyst",
+    "name": "数据分析师",
+    "icon": "📊",
+    "description": "Python / R / SQL 数据分析全家桶",
+    "slots": [
+      {
+        "slotName": "数据分析平台",
+        "description": "Python 数据科学生态",
+        "options": [
+          { "name": "Anaconda3", "chocoPackage": "anaconda3", "pricingType": "free", "description": "Python 数据科学发行版（含 Jupyter）" }
+        ]
+      },
+      {
+        "slotName": "编程语言",
+        "description": "数据分析核心语言",
+        "options": [
+          { "name": "Python", "chocoPackage": "python", "pricingType": "free", "description": "最流行的数据科学语言" },
+          { "name": "R", "chocoPackage": "r", "pricingType": "free", "description": "统计计算语言" }
+        ]
+      },
+      {
+        "slotName": "IDE",
+        "description": "写代码和分析脚本",
+        "options": [
+          { "name": "VS Code", "chocoPackage": "vscode", "pricingType": "free", "description": "轻量级编辑器" },
+          { "name": "Zed", "chocoPackage": "zed-editor", "pricingType": "free", "description": "极速协作 AI 编辑器" },
+          { "name": "PyCharm Community", "chocoPackage": "pycharm-community", "pricingType": "free", "description": "Python IDE（免费版）" },
+          { "name": "PyCharm Professional", "chocoPackage": "pycharm", "pricingType": "paid", "priceHint": "$99/年", "description": "专业版，含数据科学工具" },
+          { "name": "RStudio", "chocoPackage": "r.studio", "pricingType": "free", "description": "R 语言 IDE" }
+        ]
+      },
+      {
+        "slotName": "数据库工具",
+        "description": "SQL 查询与管理",
+        "options": [
+          { "name": "DBeaver", "chocoPackage": "dbeaver", "pricingType": "free", "description": "通用数据库管理" },
+          { "name": "SQL Server Management Studio", "chocoPackage": "sql-server-management-studio", "pricingType": "free", "description": "SQL Server 官方工具" }
+        ]
+      },
+      {
+        "slotName": "数据可视化",
+        "description": "报表与看板",
+        "options": [
+          { "name": "Power BI Desktop", "chocoPackage": "powerbi", "pricingType": "free", "description": "微软数据可视化" },
+          { "name": "Tableau Public", "chocoPackage": "tableau-public", "pricingType": "free", "description": "免费数据可视化" },
+          { "name": "Tableau Desktop", "chocoPackage": "tableau-desktop", "pricingType": "paid", "priceHint": "$70/月", "description": "专业版，功能完整" }
+        ]
+      },
+      {
+        "slotName": "版本控制",
+        "description": "代码与数据版本管理",
+        "options": [
+          { "name": "Git", "chocoPackage": "git", "pricingType": "free", "description": "版本控制系统" }
+        ]
+      },
+      {
+        "slotName": "办公套件",
+        "description": "报告与演示",
+        "options": [
+          { "name": "LibreOffice", "chocoPackage": "libreoffice-fresh", "pricingType": "free", "description": "开源办公套件" },
+          { "name": "Microsoft Office", "chocoPackage": "office365business", "pricingType": "paid", "priceHint": "订阅制", "description": "微软办公套件" }
+        ]
+      },
+      {
+        "slotName": "笔记",
+        "description": "分析过程记录",
+        "options": [
+          { "name": "Obsidian", "chocoPackage": "obsidian", "pricingType": "free", "description": "Markdown 知识库" },
+          { "name": "Notion", "chocoPackage": "notion", "pricingType": "free", "description": "协作笔记" }
+        ]
+      },
+      {
+        "slotName": "AI 大模型",
+        "description": "本地运行与微调大语言模型",
+        "options": [
+          { "name": "Ollama", "chocoPackage": "ollama", "pricingType": "free", "description": "本地运行 Llama、Mistral 等开源模型" },
+          { "name": "LM Studio", "chocoPackage": "lm-studio", "pricingType": "free", "description": "图形化本地大模型运行与聊天" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "music-producer",
+    "name": "音乐制作人",
+    "icon": "🎵",
+    "description": "编曲、录音、混音、打谱一站式工具",
+    "slots": [
+      {
+        "slotName": "音频驱动",
+        "description": "低延迟音频驱动（必装）",
+        "options": [
+          { "name": "ASIO4ALL", "chocoPackage": "asio4all", "pricingType": "free", "description": "通用低延迟 ASIO 驱动" }
+        ]
+      },
+      {
+        "slotName": "DAW（宿主）",
+        "description": "编曲与录音工作站",
+        "options": [
+          { "name": "LMMS", "chocoPackage": "lmms", "pricingType": "free", "description": "开源数字音频工作站" },
+          { "name": "Reaper", "chocoPackage": "reaper", "pricingType": "paid", "priceHint": "$60", "description": "专业 DAW，个人版实惠" }
+        ]
+      },
+      {
+        "slotName": "音频编辑",
+        "description": "录音与音频处理",
+        "options": [
+          { "name": "Audacity", "chocoPackage": "audacity", "pricingType": "free", "description": "开源音频编辑器" }
+        ]
+      },
+      {
+        "slotName": "打谱软件",
+        "description": "乐谱制作",
+        "options": [
+          { "name": "MuseScore", "chocoPackage": "musescore", "pricingType": "free", "description": "开源制谱软件" }
+        ]
+      },
+      {
+        "slotName": "模块合成器",
+        "description": "虚拟模块化合成器",
+        "options": [
+          { "name": "VCV Rack", "chocoPackage": "vcvrack", "pricingType": "free", "description": "虚拟 Eurorack 合成器" }
+        ]
+      },
+      {
+        "slotName": "音频处理",
+        "description": "格式转换与处理",
+        "options": [
+          { "name": "FFmpeg", "chocoPackage": "ffmpeg", "pricingType": "free", "description": "命令行音视频处理" }
+        ]
+      },
+      {
+        "slotName": "直播/录屏",
+        "description": "制作过程录制",
+        "options": [
+          { "name": "OBS Studio", "chocoPackage": "obs-studio", "pricingType": "free", "description": "直播与录屏" }
+        ]
+      },
+      {
+        "slotName": "浏览器",
+        "description": "找音色和教程",
+        "options": [
+          { "name": "Google Chrome", "chocoPackage": "googlechrome", "pricingType": "free", "description": "主流浏览器" }
+        ]
+      },
+      {
+        "slotName": "媒体播放",
+        "description": "参考音频播放",
+        "options": [
+          { "name": "VLC", "chocoPackage": "vlc", "pricingType": "free", "description": "万能播放器" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lang-env",
+    "name": "编程语言全环境",
+    "icon": "🧑💻",
+    "description": "主流编程语言运行环境，按需勾选安装",
+    "slots": [
+      {
+        "slotName": "Python",
+        "description": "通用编程语言，AI/数据科学首选",
+        "options": [
+          { "name": "Python 3", "chocoPackage": "python", "pricingType": "free", "description": "最新 Python 稳定版" },
+          { "name": "Anaconda3", "chocoPackage": "anaconda3", "pricingType": "free", "description": "Python 数据科学发行版" }
+        ]
+      },
+      {
+        "slotName": "Node.js / TypeScript",
+        "description": "JavaScript/TypeScript 运行时",
+        "options": [
+          { "name": "Node.js", "chocoPackage": "nodejs", "pricingType": "free", "description": "JavaScript 运行时" },
+          { "name": "Deno", "chocoPackage": "deno", "pricingType": "free", "description": "现代安全 JavaScript/TypeScript 运行时" }
+        ]
+      },
+      {
+        "slotName": "JDK",
+        "description": "Java 开发工具包",
+        "options": [
+          { "name": "Eclipse Temurin JDK", "chocoPackage": "temurin", "pricingType": "free", "description": "OpenJDK 发行版" },
+          { "name": "Oracle JDK", "chocoPackage": "jdk11", "pricingType": "paid", "priceHint": "商业许可", "description": "Oracle 官方 JDK" }
+        ]
+      },
+      {
+        "slotName": "C/C++ 工具链",
+        "description": "C/C++ 编译与构建环境",
+        "options": [
+          { "name": "MinGW-w64", "chocoPackage": "mingw", "pricingType": "free", "description": "Windows C/C++ 编译器" },
+          { "name": "LLVM/Clang", "chocoPackage": "llvm", "pricingType": "free", "description": "模块化编译器工具链" },
+          { "name": "vcpkg", "chocoPackage": "vcpkg", "pricingType": "free", "description": "C++ 包管理器" }
+        ]
+      },
+      {
+        "slotName": ".NET SDK",
+        "description": "C# / F# / .NET 开发",
+        "options": [
+          { "name": ".NET SDK", "chocoPackage": "dotnet-sdk", "pricingType": "free", "description": "微软 .NET 开发工具包" }
+        ]
+      },
+      {
+        "slotName": "Go",
+        "description": "Go 语言运行环境",
+        "options": [
+          { "name": "Go (Golang)", "chocoPackage": "golang", "pricingType": "free", "description": "Go 官方发行版" }
+        ]
+      },
+      {
+        "slotName": "Rust",
+        "description": "Rust 语言工具链",
+        "options": [
+          { "name": "Rust (rustup)", "chocoPackage": "rustup-init", "pricingType": "free", "description": "Rust 官方安装工具" }
+        ]
+      },
+      {
+        "slotName": "PHP",
+        "description": "PHP 运行环境",
+        "options": [
+          { "name": "PHP", "chocoPackage": "php", "pricingType": "free", "description": "PHP 官方运行时" },
+          { "name": "XAMPP", "chocoPackage": "xampp", "pricingType": "free", "description": "PHP + MySQL + Apache 一键包" }
+        ]
+      },
+      {
+        "slotName": "R",
+        "description": "R 语言统计计算环境",
+        "options": [
+          { "name": "R Project", "chocoPackage": "r.project", "pricingType": "free", "description": "R 语言官方发行版" }
+        ]
+      },
+      {
+        "slotName": "Ruby",
+        "description": "Ruby 运行环境",
+        "options": [
+          { "name": "Ruby", "chocoPackage": "ruby", "pricingType": "free", "description": "Ruby 官方运行时" }
+        ]
+      },
+      {
+        "slotName": "Dart",
+        "description": "Dart 语言（Flutter 开发）",
+        "options": [
+          { "name": "Dart SDK", "chocoPackage": "dartsdk", "pricingType": "free", "description": "Dart 官方 SDK" }
+        ]
+      },
+      {
+        "slotName": "Kotlin",
+        "description": "Kotlin 运行环境",
+        "options": [
+          { "name": "Kotlin", "chocoPackage": "kotlin", "pricingType": "free", "description": "Kotlin 编译器" }
+        ]
+      },
+      {
+        "slotName": "Julia",
+        "description": "Julia 高性能计算语言",
+        "options": [
+          { "name": "Julia", "chocoPackage": "julia", "pricingType": "free", "description": "Julia 官方发行版" }
+        ]
+      },
+      {
+        "slotName": "Zig",
+        "description": "Zig 系统编程语言",
+        "options": [
+          { "name": "Zig", "chocoPackage": "zig", "pricingType": "free", "description": "现代系统编程语言" }
+        ]
+      },
+      {
+        "slotName": "Lua",
+        "description": "Lua 轻量脚本语言",
+        "options": [
+          { "name": "Lua", "chocoPackage": "lua", "pricingType": "free", "description": "Lua 官方运行时" }
+        ]
+      },
+      {
+        "slotName": "Scala",
+        "description": "Scala JVM 语言",
+        "options": [
+          { "name": "Scala", "chocoPackage": "scala", "pricingType": "free", "description": "Scala 官方发行版" }
+        ]
+      },
+      {
+        "slotName": "Perl",
+        "description": "Perl 脚本语言",
+        "options": [
+          { "name": "Strawberry Perl", "chocoPackage": "strawberryperl", "pricingType": "free", "description": "Windows Perl 发行版" }
+        ]
+      },
+      {
+        "slotName": "Haskell",
+        "description": "Haskell 函数式语言",
+        "options": [
+          { "name": "GHC (Haskell)", "chocoPackage": "ghc", "pricingType": "free", "description": "Glasgow Haskell 编译器" }
+        ]
+      },
+      {
+        "slotName": "Elixir",
+        "description": "Elixir 函数式语言（Erlang VM）",
+        "options": [
+          { "name": "Elixir", "chocoPackage": "elixir", "pricingType": "free", "description": "Elixir 官方运行时" },
+          { "name": "Erlang", "chocoPackage": "erlang", "pricingType": "free", "description": "Erlang VM（Elixir 依赖）" }
+        ]
+      }
+    ]
+  }
+]

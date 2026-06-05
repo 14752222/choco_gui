@@ -289,31 +289,151 @@ if (Test-Path $chocoLib) {
     return paths;
   }
 
+  /// 批量安装多个包，**一次 UAC 提权**全部完成。
+  ///
+  /// 将所有安装命令写入临时脚本，用 RunAs 执行一次即可。
+  /// 每个包单独安装，单个失败不影响后续。
+  Future<void> installPackages(
+    List<String> packageNames, {
+    void Function(String line)? onOutput,
+  }) async {
+    if (packageNames.isEmpty) return;
+
+    // 组装逐条安装命令
+    final commands = packageNames.map((p) {
+      final escaped = p.replaceAll("'", "''");
+      return "Write-Output '--- [PACKAGE] $p ---'; choco install '$escaped' -y --no-progress; if (\$LASTEXITCODE -ne 0) { Write-Output 'EXIT:FAIL:$p:\$LASTEXITCODE' } else { Write-Output 'EXIT:OK:$p' }";
+    }).join('\n');
+
+    // 临时文件：脚本 + 输出重定向
+    final ts = DateTime.now().millisecondsSinceEpoch;
+    final scriptFile =
+        '${Directory.systemTemp.path}\\choco_gui_batch_${ts}.ps1';
+    final outFile =
+        '${Directory.systemTemp.path}\\choco_gui_batch_out_${ts}.txt';
+    final errFile =
+        '${Directory.systemTemp.path}\\choco_gui_batch_err_${ts}.txt';
+
+    // 父进程脚本：写临时 .ps1 → 提权执行并重定向输出 → 读回输出 → 清理
+    final psScript = '''
+Set-Content -Path '$scriptFile' -Value @'
+$commands
+'@
+Start-Process -FilePath powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "$scriptFile"' -Verb RunAs -Wait -WindowStyle Hidden -RedirectStandardOutput '$outFile' -RedirectStandardError '$errFile'
+if (Test-Path '$outFile') { Get-Content '$outFile' | ForEach-Object { Write-Output \$_ } }
+if (Test-Path '$errFile') { Get-Content '$errFile' | ForEach-Object { Write-Output "[ERR] \$_" } }
+Remove-Item '$scriptFile','$outFile','$errFile' -Force -ErrorAction SilentlyContinue
+''';
+
+    try {
+      onOutput?.call('[系统] 正在请求管理员权限（一次性安装 ${packageNames.length} 个软件）…');
+      final process = await Process.start(
+        _powershell,
+        ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', psScript],
+        runInShell: false,
+      );
+      process.stdout
+          .transform(const Utf8Decoder(allowMalformed: true))
+          .transform(const LineSplitter())
+          .listen((line) {
+        final trimmed = line.trim();
+        if (trimmed.isEmpty) return;
+        onOutput?.call(trimmed);
+      });
+      process.stderr
+          .transform(const Utf8Decoder(allowMalformed: true))
+          .transform(const LineSplitter())
+          .listen((line) => onOutput?.call('[ERR] $line'));
+      await process.exitCode;
+
+      // 主动清理残留临时文件
+      for (final f in [scriptFile, outFile, errFile]) {
+        try { await File(f).delete(); } catch (_) {}
+      }
+    } catch (e) {
+      onOutput?.call('Error: $e');
+      for (final f in [scriptFile, outFile, errFile]) {
+        try { await File(f).delete(); } catch (_) {}
+      }
+    }
+  }
+
   /// Installs [packageName].
   ///
+  /// Automatically requests admin elevation on Windows (triggers UAC prompt).
   /// When [installDir] is provided, it is passed via `-ia` (install arguments)
-  /// to override the package's install directory. This works in the open-source
-  /// edition by forwarding native installer parameters (e.g., NSIS `/D=`,
-  /// MSI `INSTALLDIR`). Note: the exact argument depends on the installer type
-  /// -- most common packages (NSIS-based) accept `/D=path`.
+  /// to override the package's install directory.
   Future<bool> installPackage(
     String packageName, {
     void Function(String)? onOutput,
     String? installDir,
     String? version,
   }) async {
-    String cmd = "choco install '${packageName.replaceAll("'", "''")}' -y --no-progress";
+    final escaped = packageName.replaceAll("'", "''");
+    String args = "install '$escaped' -y --no-progress";
     if (version != null && version.trim().isNotEmpty) {
-      cmd += " --version='${version.trim()}'";
+      args += " --version='${version.trim()}'";
     }
     if (installDir != null && installDir.trim().isNotEmpty) {
-      final escaped = installDir.trim().replaceAll("'", "''");
-      // Use --install-arguments (-ia) to pass native installer dir parameter.
-      // NSIS uses /D=, which covers the majority of Chocolatey packages.
-      // For MSI/InnoSetup packages the user may need to adjust manually.
-      cmd += " --ia '/D=$escaped'";
+      args += " --ia '/D=${installDir.trim().replaceAll("'", "''")}'";
     }
-    return _runStreaming(cmd, onOutput: onOutput);
+    return _runElevated(args, onOutput: onOutput);
+  }
+
+  /// 以管理员权限运行 choco 命令，通过 PowerToys RunAs 触发 UAC。
+  ///
+  /// 输出会被写入临时文件，命令完成后读取并回调 [onOutput]。
+  Future<bool> _runElevated(String chocoArgs,
+      {void Function(String)? onOutput}) async {
+    final outFile =
+        '${Directory.systemTemp.path}\\choco_gui_out_${DateTime.now().millisecondsSinceEpoch}.txt';
+    final errFile =
+        '${Directory.systemTemp.path}\\choco_gui_err_${DateTime.now().millisecondsSinceEpoch}.txt';
+
+    final psScript = '''
+Start-Process -FilePath 'choco' -ArgumentList '$chocoArgs' -Verb RunAs -Wait -WindowStyle Hidden `
+  -RedirectStandardOutput '$outFile' -RedirectStandardError '$errFile'
+if (Test-Path '$outFile') { Get-Content '$outFile' | ForEach-Object { Write-Output \$_ } }
+if (Test-Path '$errFile') { Get-Content '$errFile' | ForEach-Object { Write-Output "ERR:\$_" } }
+Remove-Item '$outFile','$errFile' -Force -ErrorAction SilentlyContinue
+''';
+
+    try {
+      onOutput?.call('[系统] 正在请求管理员权限…');
+      final process = await Process.start(
+        _powershell,
+        ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', psScript],
+        runInShell: false,
+      );
+      process.stdout
+          .transform(const Utf8Decoder(allowMalformed: true))
+          .transform(const LineSplitter())
+          .listen((line) {
+        final trimmed = line.trim();
+        if (trimmed.isEmpty) return;
+        if (trimmed.startsWith('ERR:')) {
+          onOutput?.call('[ERR] ${trimmed.substring(4)}');
+        } else {
+          onOutput?.call(trimmed);
+        }
+      });
+      final exitCode = await process.exitCode;
+
+      // 主动清理残留临时文件
+      try {
+        await File(outFile).delete();
+        await File(errFile).delete();
+      } catch (_) {}
+
+      return exitCode == 0;
+    } catch (e) {
+      onOutput?.call('Error: $e');
+      try {
+        await File(outFile).delete();
+        await File(errFile).delete();
+      } catch (_) {}
+      return false;
+    }
   }
 
   Future<bool> uninstallPackage(String packageName,
@@ -479,6 +599,68 @@ if (Test-Path $chocoLib) {
       }
     }
     return packages;
+  }
+
+  // ---- 包验证（检查 Chocolatey 仓库上是否存在） ----
+
+  /// 验证单个包在 Chocolatey 仓库是否存在。
+  ///
+  /// 使用 `choco search --exact --limit-output` 轻量查询，
+  /// 不需要管理员权限。
+  Future<bool> verifyPackage(String packageName) async {
+    try {
+      final escaped = packageName.replaceAll("'", "''");
+      final result = await Process.run(
+        _powershell,
+        ['-NoProfile', '-Command', "choco search '$escaped' --exact --limit-output"],
+        runInShell: false,
+      );
+      if (result.exitCode != 0) return false;
+      final output = (result.stdout as String).trim();
+      if (output.isEmpty) return false;
+      // 输出格式: "name|version" 或者 "0 packages found"
+      if (RegExp(r'^0 packages? found').hasMatch(output)) return false;
+      return output.contains('|');
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// 批量验证包名，返回 {包名: 是否存在}。
+  ///
+  /// 用一次 PowerShell 调用来批量验证，比逐个调用快得多。
+  Future<Map<String, bool>> verifyPackages(List<String> packageNames) async {
+    final result = <String, bool>{};
+    if (packageNames.isEmpty) return result;
+
+    // 构建批量搜索脚本
+    final commands = packageNames.map((p) {
+      final escaped = p.replaceAll("'", "''");
+      return "\$out = choco search '$escaped' --exact --limit-output 2>\$null; if (\$LASTEXITCODE -eq 0 -and \$out -match '\\|') { Write-Output 'OK:$p' } else { Write-Output 'NOTFOUND:$p' }";
+    }).join('\n');
+
+    try {
+      final proc = await Process.run(
+        _powershell,
+        ['-NoProfile', '-Command', commands],
+        runInShell: false,
+      );
+      for (final raw in (proc.stdout as String).split('\n')) {
+        final line = raw.trim();
+        if (line.isEmpty) continue;
+        if (line.startsWith('OK:')) {
+          result[line.substring(3)] = true;
+        } else if (line.startsWith('NOTFOUND:')) {
+          result[line.substring(9)] = false;
+        }
+      }
+    } catch (_) {}
+
+    // 对没返回结果的包名标记为 false
+    for (final p in packageNames) {
+      result.putIfAbsent(p, () => false);
+    }
+    return result;
   }
 
   // ---- Source management ----

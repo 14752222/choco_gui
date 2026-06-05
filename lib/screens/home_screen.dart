@@ -4,6 +4,7 @@ import 'installed_screen.dart';
 import 'search_screen.dart';
 import 'settings_screen.dart';
 import 'recommended_screen.dart';
+import 'bundles_screen.dart';
 
 /// Main scaffold with NavigationRail on the left and content on the right.
 class HomeScreen extends StatefulWidget {
@@ -14,10 +15,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // 0=推荐, 1=已安装, 2=搜索, 3=设置
+  // 0=套餐, 1=推荐, 2=已安装, 3=搜索, 4=设置
   int _selectedIndex = 0;
 
   static const List<NavigationRailDestination> _destinations = [
+    NavigationRailDestination(
+      icon: Icon(Icons.widgets_outlined),
+      selectedIcon: Icon(Icons.widgets),
+      label: Text('套餐'),
+    ),
     NavigationRailDestination(
       icon: Icon(Icons.star_outline),
       selectedIcon: Icon(Icons.star),
@@ -186,15 +192,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildContent() {
     switch (_selectedIndex) {
       case 0:
-        return const RecommendedScreen();
+        return const BundlesScreen();
       case 1:
-        return const InstalledScreen();
+        return const RecommendedScreen();
       case 2:
-        return const SearchScreen();
+        return const InstalledScreen();
       case 3:
+        return const SearchScreen();
+      case 4:
         return const SettingsScreen();
       default:
-        return const RecommendedScreen();
+        return const BundlesScreen();
     }
   }
 

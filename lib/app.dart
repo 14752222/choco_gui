@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'providers/app_provider.dart';
+import 'providers/bundle_provider.dart';
 import 'screens/home_screen.dart';
 
 // ── Custom theme colors ──────────────────────────────────────────────
@@ -20,10 +21,12 @@ class ChocoApp extends StatefulWidget {
 
 class _ChocoAppState extends State<ChocoApp> {
   final AppProvider _provider = AppProvider();
+  final BundleProvider _bundleProvider = BundleProvider();
 
   @override
   void dispose() {
     _provider.dispose();
+    _bundleProvider.dispose();
     super.dispose();
   }
 
@@ -31,18 +34,21 @@ class _ChocoAppState extends State<ChocoApp> {
   Widget build(BuildContext context) {
     return AppProviderScope(
       provider: _provider,
-      child: ValueListenableBuilder<ThemeMode>(
-        valueListenable: _provider.themeModeNotifier,
-        builder: (context, themeMode, _) {
-          return MaterialApp(
-            title: 'Chocolatey GUI',
-            debugShowCheckedModeBanner: false,
-            themeMode: themeMode,
-            theme: _buildLightTheme(),
-            darkTheme: _buildDarkTheme(),
-            home: const HomeScreen(),
-          );
-        },
+      child: BundleProviderScope(
+        provider: _bundleProvider,
+        child: ValueListenableBuilder<ThemeMode>(
+          valueListenable: _provider.themeModeNotifier,
+          builder: (context, themeMode, _) {
+            return MaterialApp(
+              title: 'Chocolatey GUI',
+              debugShowCheckedModeBanner: false,
+              themeMode: themeMode,
+              theme: _buildLightTheme(),
+              darkTheme: _buildDarkTheme(),
+              home: const HomeScreen(),
+            );
+          },
+        ),
       ),
     );
   }

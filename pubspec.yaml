@@ -2,7 +2,7 @@ name: choco_gui
 description: "A modern Chocolatey package manager GUI built with Flutter"
 publish_to: 'none'
 
-version: 1.0.1+2
+version: 1.0.2+3
 
 environment:
   sdk: ^3.10.7
@@ -26,7 +26,7 @@ msix_config:
   publisher_display_name: Choco GUI
   publisher: CN=ChocoGUI
   identity_name: com.chocogui.app
-  msix_version: 1.0.1.0
+  msix_version: 1.0.2.0
   logo_path: assets\images\logo.png
   capabilities: internetClient
   # certificate_path and certificate_password are intentionally omitted from
